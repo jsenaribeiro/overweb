@@ -1,7 +1,8 @@
 {
    "exclude": [
       "node_modules/", 
-      "builds/"
+      "@npm/",
+      "@"
    ],
    "compilerOptions": {
       "baseUrl": ".",
@@ -9,20 +10,20 @@
       "types": ["bun-types"],
       "target": "esnext",
       "module": "esnext",
-      "outDir": "./builds",
+      "outDir": "./@npm",
       "rootDir": ".",
       "strict": false,
-      "sourceMap": true,
-      "declaration": true,
-      "esModuleInterop": true,
-      "moduleDetection": "auto",
-      "moduleResolution": "bundler",
-      "emitDeclarationOnly": true,
       "allowJs": true,
       "composite": true,
+      "sourceMap": true,
+      "declaration": true,
       "skipLibCheck": true,
       "noImplicitAny": false,
+      "esModuleInterop": true,
       "downlevelIteration": true,
+      "moduleDetection": "auto",
+      "moduleResolution": "bundler",
+      "emitDeclarationOnly": false,
       "allowSyntheticDefaultImports": true,
       "forceConsistentCasingInFileNames": true
    }

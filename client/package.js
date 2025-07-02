@@ -3,10 +3,8 @@ const [type, version] = process.argv.slice(2);
 if (type == 'build') {
    console.log('bulding...\n')
 
-   await Bun.$`mkdir -p ./builds`
    await Bun.$`rm -rf tsconfig.tsbuildinfo`
-   await Bun.$`tsc -p tsconfig.build.json`
-   await Bun.$`bun build ./src/index.ts --outdir ./builds`
+   await Bun.$`tsc -p tsconfig.client.json`
 
    console.log('\n--- build with success! ---\n')
 }

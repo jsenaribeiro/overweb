@@ -6,6 +6,7 @@
    "license": "MIT",
    "scripts": {
       "build": "bun package.js build",
+      "final": "bun build index.ts --minify --outfile @/bundle.min.js",
       "minor": "bun package.js publish minor",
       "major": "bun package.js publish major",
       "patch": "bun package.js publish patch"

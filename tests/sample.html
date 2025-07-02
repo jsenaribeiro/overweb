@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+   <script src="../client/@/bundle.min.js"></script>
+   <title>Sample</title>
+</head>
+<body style="padding: 30px;">
+   <h1>Sample</h1>
+   <h2 i18n>Welcome</h2>
+   <h3 i18n="hello world">Hello World!</h3>
+   <script>
+      i18n.addLanguage('pt')
+      i18n.addLanguage('en')
+      i18n.load('./langs')
+   </script>
+
+   <button link="/example">example</button>
+   <button link='/httpbin'>httpbin</button>
+
+   <slot route="/example" src="./example.html">loading...</slot>
+   <slot route="/httpbin" src="https://httpbin.org/">loading...</slot>
+</body>
+</html>

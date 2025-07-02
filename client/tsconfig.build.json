@@ -1,0 +1,16 @@
+{
+   "exclude": ["@", "node_modules"],
+   "compilerOptions": {
+      "strict": false,
+      "types": ["bun-types"],
+      "outDir": "./@",
+      "module": "ESNext",
+      "target": "ESNext",
+      "declaration": true,
+      "noImplicitAny": false,
+      "emitDeclarationOnly": false,
+      "moduleResolution": "Bundler",
+      "esModuleInterop": true,
+      "skipLibCheck": true
+   },
+}
