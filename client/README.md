@@ -7,25 +7,6 @@
 * css-tagger: css-component pattern
 * i18n-min: minimalist i18n
 
-<table>
-  <tr>
-    <td>
-      <h3>Coluna 1</h3>
-      <ul>
-        <li>Item A</li>
-        <li>Item B</li>
-      </ul>
-    </td>
-    <td>
-      <h3>Coluna 2</h3>
-      <ul>
-        <li>Item C</li>
-        <li>Item D</li>
-      </ul>
-    </td>
-  </tr>
-</table>
-</div>
 
 ## js-mixins
 
