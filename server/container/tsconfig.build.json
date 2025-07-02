@@ -1,0 +1,24 @@
+{
+   "include": [
+      "index.ts",
+      "mixins.ts",
+      "components",
+      "container",
+      "commander"
+   ],
+   "exclude": ["node_modules", "package"],
+   "compilerOptions": {
+      "strict": false,
+      "jsx": "react-jsx",
+      "module": "ESNext",
+      "target": "ESNext",
+      "outDir": "./package",
+      "types": ["bun-types"],
+      "declaration": true,
+      "noImplicitAny": false,
+      "emitDeclarationOnly": true,
+      "moduleResolution": "Bundler",
+      "esModuleInterop": true,
+      "skipLibCheck": true
+   },
+}

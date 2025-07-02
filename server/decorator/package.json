@@ -1,15 +1,18 @@
 {
-   "version": "0.0.1",
-   "name": "@overweb/client",
+   "version": "0.0.2",
+   "name": "meta-decorator",
    "author": "Jonathan Sena Ribeiro",
    "description": "function decorators",
    "license": "MIT",
    "scripts": {
       "build": "bun package.js build",
-      "final": "bun build index.ts --minify --outfile @/bundle.min.js",
       "minor": "bun package.js publish minor",
       "major": "bun package.js publish major",
-      "patch": "bun package.js publish patch"
+      "patch": "bun package.js publish patch",
+      "test:debug": "bun test --inspect-brk"
+   },
+   "dependencies": {
+      "@overweb/client": "latest"
    },
    "devDependencies": {
       "@types/react": "latest",

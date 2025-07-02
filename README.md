@@ -16,7 +16,7 @@ Overweb is a software engineering research in frontend developement. The **jss**
 
 | | |
 |-:|-|
-| **aid-js** <br> (< 1kb) | + fetch swr extensions: cache, token, clear <br> ~ type mixins: string, object, array <br>  ~ event api fluent facade |
+| **aid-js** <br> (< 1kb) | + fetch swr extensions: cache, token, clear <br> +  css-tagger: css component pattern <br> ~ type mixins: string, object, array <br>  ~ event api fluent facade |
 | **async-api** <br> (< 1kb) | ^ js-aid <br> + REST mapping <br> + synchorization <br> + authentication |
 | **native-spa** <br> agnostic <br> (< 30kb) | ^ async-api, js-plus, js-aid <br> + router-api: unified router <br> + multi-spa: microfrontend <br> + i18n-aid: i18n props |
 
@@ -24,7 +24,7 @@ Overweb is a software engineering research in frontend developement. The **jss**
 
 | | |
 |-:|-|
-| **jss-metaprogram**| + function decorators <br> - new globals env, ioc, own <br> ~ facade File, Path, JSXON, etc |
+| **meta-decorator**| + function decorators <br> - new globals env, ioc, own <br> ~ facade File, Path, JSXON, etc |
 | **html-container** | + micro-component architecture <br> + web standard friendly <br> + JSX-in-HTML feature |
 | **jsx-launcher** | + loader: build, import, link(html) <br>  + render: component, element, fragment <br> + server: match(route), fetch(req), catch(ex) |
 

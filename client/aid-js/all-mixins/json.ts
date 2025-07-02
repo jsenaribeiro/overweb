@@ -7,7 +7,8 @@ declare global {
       is(value: string): boolean
       scriptify<T=any>(that: T): string
       scriptify<T=any>(that: T, swap: Swap): string
-      scriptify<T=any>(that: T, swap: Swap, functionless: boolean): string
+      scriptify<T = any>(that: T, swap: Swap, functionless: boolean): string
+      tryParse<T=object>(value: string): T |undefined
    }
 }
 
@@ -62,6 +63,11 @@ JSON.scriptify = function<T=any>(that: T, swap?: Swap, functionless?: boolean) {
       console.log('\nerror scriptify', that)
       throw ex
    }
+}
+
+JSON.tryParse = function (value: string) {
+   try { return JSON.parse(value) }
+   catch { return undefined }
 }
 
 export { }

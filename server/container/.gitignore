@@ -1,13 +1,9 @@
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
 # Builds
-modules/builds
-client/@
-server/@
-package
+package/
 
 # Logs
-
 
 logs
 _.log

@@ -50,5 +50,21 @@ declare global {
       //** fix string like:
       // - double spaces; */
       fix(): string
+
+      // match alternative with object return
+      find(regex: RegExp): FindResult | undefined
+      
+      // matchAçç alternative with object return
+      findAll(regex: RegExp): FindResult[]
+   }
+
+   interface FindResult {
+      index: number
+      found: string
+      first: string
+      parts: string[]
+   }
+
+   interface String {
    }
 }

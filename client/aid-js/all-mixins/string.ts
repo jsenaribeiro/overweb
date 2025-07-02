@@ -89,11 +89,41 @@ const charCode = x => x ? x.charCodeAt(0) : 0
 const reduceHash = (x, y) => charCode(x) + charCode(y)
 
 // function getter<T>(field: string, call: (arg: any) => T) {
-//    Object.defineProperty(String.prototype, field, { 
+//    Object.defineProperty(String.prototype, field, {
 //       get() { return call(this) }
-//    })   
+//    })
 // }
 
 // getter("hashCode", that => that.split("").reduce(reduceHash))
+
+String.prototype.find = function (regex) {
+   const content = this as string
+   const returns = content.match(regex)
+
+   if (!returns) return undefined
+
+   const index = returns.index || 0
+   const found = returns[0]
+   const first = returns[1]
+   const parts = returns
+
+   return { index, found, parts, first }
+}
+
+String.prototype.findAll = function (regex) {
+   const results: FindResult[] = []
+   const content = this as string
+
+   for (const item of content.matchAll(regex)) {
+      const index = item.index
+      const found = item[0]
+      const first = item[1]
+      const parts = item
+
+      results.push({ index, found, first, parts })
+   }
+
+   return results
+}
 
 export { }
