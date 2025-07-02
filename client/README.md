@@ -7,19 +7,24 @@
 * css-tagger: css-component pattern
 * i18n-min: minimalist i18n
 
-<div style="display: inline-block; width: 45%; vertical-align: top;">
-  <h3>Coluna 1</h3>
-  <ul>
-    <li>Item A</li>
-    <li>Item B</li>
-  </ul>
-</div>
-<div style="display: inline-block; width: 45%; vertical-align: top; margin-left: 5%;">
-  <h3>Coluna 2</h3>
-  <ul>
-    <li>Item C</li>
-    <li>Item D</li>
-  </ul>
+<table>
+  <tr>
+    <td>
+      <h3>Coluna 1</h3>
+      <ul>
+        <li>Item A</li>
+        <li>Item B</li>
+      </ul>
+    </td>
+    <td>
+      <h3>Coluna 2</h3>
+      <ul>
+        <li>Item C</li>
+        <li>Item D</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 </div>
 
 ## js-mixins
