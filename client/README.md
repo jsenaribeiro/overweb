@@ -7,6 +7,21 @@
 * css-tagger: css-component pattern
 * i18n-min: minimalist i18n
 
+<div style="display: inline-block; width: 45%; vertical-align: top;">
+  <h3>Coluna 1</h3>
+  <ul>
+    <li>Item A</li>
+    <li>Item B</li>
+  </ul>
+</div>
+<div style="display: inline-block; width: 45%; vertical-align: top; margin-left: 5%;">
+  <h3>Coluna 2</h3>
+  <ul>
+    <li>Item C</li>
+    <li>Item D</li>
+  </ul>
+</div>
+
 ## js-mixins
 
 Some js mixins helpers.
@@ -59,13 +74,13 @@ fetchApi(url, { retry: 60000 })       // cache tm
 fetchApi.clear('todos', 'ok')    // remove cached keys
 fetchApi.clear()                 // remove all caches
 
-fetch.token  // preserves last request.headers.Authorization
+fetchApi.token  // preserves last request.headers.Authorization
 
 // request pooling interval (get only)
-await fetch(url, { reget: 1000 })
+await fetchApi(url, { reget: 1000 })
 
 // request retry after non 200 status
-await fetch(url, { retry: { times:3, delay: 1000 }})
+await fetchApi(url, { retry: { times:3, delay: 1000 }})
 ```
 
 ## synch-api
