@@ -1,6 +1,7 @@
 import './aid-js/event-api/index.ts'
 import './aid-js/fetch-swr/index.ts'
 import './aid-js/all-mixins/index.ts'
+import './aid-js/css-tagger/index.ts'
 import './async-api/index.ts'
 import './native-spa/i18n/index.ts'
 import './native-spa/router-api/index.ts'

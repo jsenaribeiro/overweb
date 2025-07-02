@@ -36,7 +36,7 @@ async function fetchApi(...args: any[]) {
       if (has) return fetchApi.cache[key]
 
       const cleared = () => { delete fetchApi.cache[key] }
-      const timeout = Time.getMillisecondsFrom(cache as any)
+      const timeout = Time.parse(cache as any)
       const content = await refetch(url, finalSettings, retry)
 
       fetchApi.timer[key] = setTimeout(cleared, timeout)

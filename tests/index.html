@@ -4,6 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+   <link rel="stylesheet" href="./index.css" />
    <script src="../client/@/bundle.min.js"></script>
    <title>Sample</title>
 </head>
@@ -22,5 +23,10 @@
 
    <slot route="/example" src="./example.html">loading...</slot>
    <slot route="/httpbin" src="https://httpbin.org/">loading...</slot>
+
+   <grid --cols="1fr 1fr">
+      <p>test 1</p>
+      <p>test 2</p>
+   </grid>
 </body>
 </html>

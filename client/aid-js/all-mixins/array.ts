@@ -10,11 +10,6 @@ Array.range ||= function(...args: any[]) {
    return Array(final).fill(first).map((x,i) => x+i)
 }
 
-Array.prototype.first ||= function(predicate?) { 
-   predicate ||= (x => x)
-   return this.map(predicate).find(predicate) || undefined 
-}
-
 Array.prototype.distinct ||= function(selector?) { 
    if (!selector) return [...new Set<any>(this)]
    const already = new Set()
@@ -25,23 +20,6 @@ Array.prototype.distinct ||= function(selector?) {
    })
 }
 
-Array.prototype.pairs ||= function<T>() {
-   const inner = x => this.flatMap(y => x !== y ? [[x, y]] : []).distinct()
-
-   return this.flatMap(inner).filter(x => x).distinct() as [T,T][]
-}
-
 Array.prototype.count ||= function(predicate) {
    return this.filter(predicate).length
-}
-
-Array.prototype.pipeline ||= function (this: any[], initial: any) {
-   if (!this.length) return initial
-   if (typeof this[0] != 'function') throw new Error('Array.pipeline is only for function array')
-   else return this.reduce((arg, fnc) => fnc(arg), initial)
-}
-
-Array.prototype.clear ||= function (this:any[]) {
-   for (var i = this.length - 1; i >= 0; i--) 
-      delete this[i]
 }

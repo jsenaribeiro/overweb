@@ -22,7 +22,7 @@ declare global {
       /** set an object member by dot syntax field 
        * @param {boolean} empty cast null and undefined to ''
        * @param {string} field dot syntax path to object value
-       * @param {object} value event.target.value to set in field 
+       * @param {object} value event.target.value to set in field
        * @returns log array with mutation information */
       valueOf<T = any>(empty: boolean, field: string, value: Event<T>): object[]
 
