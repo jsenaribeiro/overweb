@@ -13,11 +13,11 @@ Some js mixins helpers.
 
 | | |
 |-|-|
-| array | distinct(selector?), count(predicate) |
-| object | valueOf(field, value?), Object.isEmpty(obj) |
-| number | format(commas:boolean, digits) |
-| JSON | JSON.scriptfy(object\|function) |
-| string | capitalize(), toArray(), toObject(), toNumber(), toRegex() |
+| array | `distinct(selector?)`, `count(predicate)` |
+| object | `valueOf(field, value?)`, `Object.isEmpty(obj)` |
+| number | `format(commas:boolean, digits)` |
+| JSON | `JSON.scriptfy(object\|function)` |
+| string | `capitalize()`, `toArray()`, `toObject()`, `toNumber()`, `toRegex()` |
 
 ## time-api
 
