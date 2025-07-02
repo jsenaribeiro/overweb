@@ -1,3 +1,4 @@
+import { Loader } from 'bun'
 export interface DecoratorCode {
    full: string; // @decorator(args)
    name: string; // decorator
@@ -45,3 +46,8 @@ export enum Ignore {
 export type Writable<T> = {
    -readonly [P in keyof T]: T[P];
 }
+
+
+export type ImportResult = Promise<{ type: Loader, code: string }>
+
+export type ImportHandle = (path: string, code: string) => ImportResult | undefined

@@ -1,5 +1,4 @@
 import { ExportCode } from "./shared";
-import 'extended-web'
 
 const patterns = {
    declaration: /^\s*export\s+(async\s+)?function(\*?)\s+([a-zA-Z_$][\w$]*)\s*\(([^)]*)\)/gm,

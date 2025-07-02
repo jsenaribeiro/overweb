@@ -1,36 +1,21 @@
 /** @module Own reflection type */
 
-import './own.route.d'
-import './own.handler.d'
+/// <reference path="./own.route.d.ts" />
+/// <reference path="./own.handler.d.ts" />
 
 declare global {
-   interface Own {
+   interface Own<T=any> {
       is: Status
       url: string 
       root: HTMLQuery
       route: MetaRoute
       states: State[]
       modules: Module[]
-      handlers: Handlers
+      handlers: T
       functions: Function[]
       hydrations: Hydration[]
       directories: Directories
-   }   
-   
-   interface Handlers {
-      catch: CatchHandler[]
-      fetch: FetchHandler[]
-      match: {
-         jsx: {
-            component: JsxHandler
-            fragment: JsxHandler
-            element: JsxHandler
-         }
-         make: MakeHandler[]
-         props: PropsHandler[]
-         import: ImportHandler[]
-      }
-   }      
+   }        
       
    interface State {
       /** uid = component unique identifier 

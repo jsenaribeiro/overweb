@@ -3,9 +3,9 @@ import { validate } from "./validate"
 import { DECORATOR_RGX } from "./regex"
 import { getModuleCode } from "../module"
 import { extractFunctions } from "./parser"
-import { Check, FunctionCode, Ignore } from "../types/shared"
+import { Check, FunctionCode, Ignore, ImportHandle } from "../types"
 
-export const functionDecoratorPlugin: ImportHandler = handler
+export const functionDecoratorPlugin: ImportHandle = handler
 
 async function handler(path: string, code: string) {
    if (!path.match(/\.[tj]s$|\.[tj]sx$/)) return undefined   

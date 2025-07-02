@@ -1,5 +1,4 @@
 /// <reference path="object.d.ts" />
-/// <reference path="./index.d.ts" />
 
 /** WARNING!!! Avoid any new object fields, because it bugs Bun,
 * only adds static extension or method overrides. */

@@ -4,8 +4,6 @@ import './object.js'
 import './signal.js'
 import './string.js'
 import './number.js'
-import './function.js'
 import './request.js'
-import './index.js'
 
 export { }

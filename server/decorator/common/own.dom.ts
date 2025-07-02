@@ -1,13 +1,13 @@
-import "./own";
+/// <reference path="own.d.ts" />
 
-export class BrowserOwn implements Own {
+export class BrowserOwn<T=any> implements Own<T> {
    public is = is
    public url = './index.html'
    public root = '#root'
    public route = {} 
    public states = []
    public modules = []
-   public handlers = handlers
+   public handlers = {} as any
    public functions = []
    public hydrations = []
    public directories: Directories = {
@@ -22,20 +22,5 @@ const is: Status = {
    debug: false,
    fails: false,
    get serve() { return !globalThis.document }
-}
-
-const handlers: Handlers = {
-   catch: [],
-   fetch: [],
-   match: {
-      jsx: {
-         component: x => x.jsx,
-         fragment: x => x.jsx,
-         element: x => x.jsx
-      },
-      make: [],
-      props: [],
-      import: []
-   }
 }
 

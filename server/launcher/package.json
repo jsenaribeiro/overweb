@@ -1,6 +1,6 @@
 {
-   "version": "0.0.5",
-   "name": "meta-decorator",
+   "version": "0.0.1",
+   "name": "jsx-launcher",
    "author": "Jonathan Sena Ribeiro",
    "description": "function decorators",
    "license": "MIT",
@@ -9,14 +9,19 @@
       "minor": "bun package.js publish minor",
       "major": "bun package.js publish major",
       "patch": "bun package.js publish patch",
-      "final": "bun build index.ts --minify --outfile package/bundle.min.js"
+      "test:debug": "bun test --inspect-brk"
    },
    "dependencies": {
-      "@overweb/client": "latest"
+      "@overweb/client": "latest",
+      "meta-decorator": "latest"
    },
    "devDependencies": {
       "@types/react": "latest",
       "typescript": "latest",
       "bun-types": "latest"
+   },
+   "peerDependencies": {
+      "react": "latest",
+      "react-dom": "latest"
    }
 }

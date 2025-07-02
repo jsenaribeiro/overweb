@@ -2,8 +2,9 @@
 import { Loader } from "bun"
 import { extractExportsFromCode } from "./exports"
 import { extractImportsFromCode } from "./imports"
+import { ImportHandle } from "../types"
 
-export const moduleMetadataPlugin: ImportHandler = plugin
+export const moduleMetadataPlugin: ImportHandle = plugin
 
 async function plugin(path: string, code: string) {
    if (!path.match(/\.[tj]s$|\.[tj]sx$/)) return undefined
