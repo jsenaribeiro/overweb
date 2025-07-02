@@ -1,7 +1,5 @@
 # @verweb/client
 
-## Features
-
 * js-mixins: prototype extensions
 * time-api: useful simple time api
 * event-api: EventSouce fluent API facade
@@ -9,7 +7,7 @@
 * css-tagger: css-component pattern
 * i18n-min: minimalist i18n
 
-### js-mixins
+## js-mixins
 
 Some js mixins helpers.
 
@@ -21,7 +19,7 @@ Some js mixins helpers.
 | JSON | JSON.scriptfy(object\|function) |
 | string | capitalize(), toArray(), toObject(), toNumber(), toRegex() |
 
-### time-api
+## time-api
 
 Time API with timeString support.
 
@@ -33,7 +31,7 @@ await Time.wait(1000, function(){ })
 await Time.delay("30s")
 ```
 
-### event-api
+## event-api
 
 Fluent API facade for EventSource.
 
@@ -48,7 +46,7 @@ const es = eventApi(url, { withCredentials: true })
 es.close() 
 ```
 
-### fetch-swr
+## fetch-swr
 
 SWR pattern extension for fetch API with fetchApi.
 
@@ -70,7 +68,7 @@ await fetch(url, { reget: 1000 })
 await fetch(url, { retry: { times:3, delay: 1000 }})
 ```
 
-### synch-api
+## synch-api
 
 ORM for RESTful API that abstract the fetch implementation.
 
@@ -87,7 +85,7 @@ useApi.sync()     // get request (query)
 useApi.sync(true) // post|put|delete request (diff mutation)
 ```
 
-### i18n-min
+## i18n-min
 
 Minimalist web standard approach globalization.
 
@@ -114,7 +112,7 @@ Example of pt.json in ./langs folder.
 }
 ```
 
-### router-api
+## router-api
 
 Unified router API for in-memory client-side routing.
 
@@ -126,7 +124,7 @@ router.params<T>(route)    // dynamic route object
 router.queries             // query string object
 ```
 
-### multi-spa
+## multi-spa
 
 Minimalist microfrontend client-side slots and router-api with route attribute for conditional view and link for clickable router.
 
@@ -140,7 +138,7 @@ Minimalist microfrontend client-side slots and router-api with route attribute f
 ```
 
 
-### css-tagger
+## css-tagger
 
 CSS component using web standar with CSS attribute suggar syntax.
 
