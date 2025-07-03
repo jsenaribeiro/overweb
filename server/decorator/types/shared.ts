@@ -47,7 +47,6 @@ export type Writable<T> = {
    -readonly [P in keyof T]: T[P];
 }
 
+export type ImportHandled = Promise<{ type: Loader, code: string }>
 
-export type ImportResult = Promise<{ type: Loader, code: string }>
-
-export type ImportHandle = (path: string, code: string) => ImportResult | undefined
+export type ImportHandler = (path: string, code: string) => ImportHandled | undefined

@@ -22,6 +22,18 @@ declare global {
       /** CSS styling object */
       stylings: record
    }
+
+   interface ProblemDetails {
+      type?: string
+      title?: string
+      status?: number
+      detail?: string
+      instance?: string
+      traceId?: string
+      errors?: { fieldName: string, message: string }[]
+   }
+
+   type Invalid<T = any> = { error: string, field: string, value: T }
 }
 
 export { }

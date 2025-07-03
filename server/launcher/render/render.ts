@@ -1,7 +1,6 @@
 import React from "react"
 import { flow } from "./shared"
-import '../shared/types/render'
-import { getComponentName } from "shared"
+import { getComponentName } from "../shared"
 
 export function render(root: JSX)
 export function render(root: JSX, id: number)

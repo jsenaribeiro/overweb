@@ -1,16 +1,17 @@
 import { SitemapStream, streamToPromise } from "sitemap"
-import { context } from "context"
+import { global } from "meta-decorator"
+import { Path } from "../shared"
 import { pd } from 'pretty-data'
-import { Path } from 'commons'
 import * as fs from 'fs'
 
 export async function generateSiteMap() {
    if (!global.env?.HOSTNAME) return
 
-   const path = context.options.path.builds
+   const path = global.own.directories.builds
    const sitemapPath = `${path}/sitemap.xml`
    const writeStream = fs.createWriteStream(sitemapPath)
    const sitemap = new SitemapStream({ hostname: global.env.HOSTNAME })
+   const mini = !!global.env.MINIFIED
       
    sitemap.pipe(writeStream)
 
@@ -26,7 +27,7 @@ export async function generateSiteMap() {
    const namesp = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`
    const result = header + namesp + buffer.toString() 
    
-   await Bun.write(sitemapPath, context.options.mini ? result : pd.xml(result));
+   await Bun.write(sitemapPath, mini ? result : pd.xml(result));
 }
 
 const generateEachInformationHTML = (file) =>({

@@ -1,5 +1,5 @@
 import { renderToString } from 'react-dom/server'
-import { PRIMITIVES } from 'shared'
+import { PRIMITIVES } from '../../shared'
 
 const map = [
    { key: "$RE", for: Symbol.for("react.element") },

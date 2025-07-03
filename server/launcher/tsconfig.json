@@ -1,8 +1,9 @@
 {
    "exclude": [
       "**/*test.ts",
-      "node_modules/", 
-      "package/",
+      "**/node_modules",
+      "**/package",
+      "**/tests"
    ],
    "compilerOptions": {
       "baseUrl": ".",

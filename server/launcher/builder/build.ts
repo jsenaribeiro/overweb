@@ -1,30 +1,27 @@
 "use server"
 
 import { generateSiteMap } from './sitemap'
-import { buildClientSideScript } from "./client";
-import { generateRobotTxt } from "./robot";
-import { createBundle } from "./bundle";
-import { Path, File } from 'shared';
+import { buildClientSideScript } from "./client"
+import { generateRobotTxt } from "./robot"
+import { createBundle } from "./bundle"
+import { Path, File } from '../shared'
+import { global } from 'meta-decorator'
 
-var paths: Directories, start: Options
+const paths = global.own.directories
 
 /** build the application using bun 
  * @param {boolean} indexOnly only seeks to build the index pages */
 export async function bundler(indexOnly: boolean): Promise<true> {
-   start = context.options
-   paths = start.path
-
    const buildPath = Path.from(paths.builds)
-   const indexHTML = await File.load(start.html).then(x => x.text())
 
    global.own.is.build = true // disable import handler (bun.plugin)
 
    await buildPath.clear()
-   await parseHandlers(indexHTML, indexOnly)   
+   await building(indexOnly)   
    await generateSiteMap()
    await generateRobotTxt()
    await buildClientSideScript()
-   await createBundle(indexHTML)
+   await createBundle()
 
    global.own.is.build = false
 
@@ -32,17 +29,19 @@ export async function bundler(indexOnly: boolean): Promise<true> {
 }
 
 /** recursive route folders for builder handlers */
-async function parseHandlers(indexHTML: string, indexOnly: boolean) {
+async function building(indexOnly: boolean) {
    const routePath = Path.from(paths.routes)
+   const indexHTML = await File.load(global.own.url).then(x => x.text())
+   const bundlings = Object.entries(global.own.handlers.build.bundle)
 
    for (const item of await routePath.directory())
-   for (const pack of context.packers) {
-      if (item.isDirectory) parseHandlers(indexHTML, indexOnly)
-      if (!item.filename.endsWith(pack.extension)) continue
+   for (const [ext, handler] of bundlings) {
+      if (item.isDirectory) await building(indexOnly)
+      if (!item.filename.endsWith(ext)) continue
       if (indexOnly && !item.filename.startsWith('index.')) continue
       
       const file = await File.load(item.path)
 
-      await pack.handler(indexHTML, file)
+      await handler(indexHTML, file)
    }
 }

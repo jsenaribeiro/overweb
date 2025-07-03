@@ -1,9 +1,15 @@
-import './own.d'
-import './own.route.d'
-import './own.handler.d'
-
-import { BrowserOwn } from "./own.dom"
-
 /** @module Own reflection default */
 
-export const own: Own = new BrowserOwn()
+declare global {
+   interface Own {
+      modules: Module[]
+      functions: Function[]
+      decorators: IDecorator[]
+   }
+}
+
+export const own: Own = {
+   decorators: [],
+   functions: [],
+   modules: []
+}

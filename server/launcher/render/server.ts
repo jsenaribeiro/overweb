@@ -1,9 +1,9 @@
-import { RenderError, getTagName } from "shared"
+import { RenderError, getTagName } from "../shared"
 import { SELF_CLOSE_TAGS } from "./shared"
 
 const handler = global.own.handlers.match
 
-export async function component(args: Params<Component>, flow: Renderer) {
+export async function component(args: Params<Component>, flow: Flows) {
    try {
       args.earlier = args.jsx.props
       args.parent = args.jsx.type.name
@@ -21,7 +21,7 @@ export async function component(args: Params<Component>, flow: Renderer) {
    }
 }
 
-export async function element(args: Params, flow: Renderer) {
+export async function element(args: Params, flow: Flows) {
    const label = getTagName(args.jsx)
    const child = await handler.jsx.element(args)
    const apply = (props, handle) => handle(props, args)
@@ -37,7 +37,7 @@ export async function element(args: Params, flow: Renderer) {
    return { ...args.jsx, props: { ...props, children } }
 }
 
-export async function fragment(args: Params, flow: Renderer) {
+export async function fragment(args: Params, flow: Flows) {
    const frg = await handler.jsx.fragment(args)
    const jsx = frg.props?.children as any
 

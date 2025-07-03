@@ -14,11 +14,11 @@ declare global {
 
    abstract class AbstractRender<T extends JsxType, P = any> implements Params<T, P> {
       constructor(type: RenderType) { this.renderer = type }      
-      public id: number 
+      public id: number
       public jsx: JSX<T, P> 
-      public root: string 
+      public root: string
       public feeds: Feeds 
-      public parent: string 
+      public parent: string
       public earlier: any 
       public renderer: RenderType
    }
@@ -35,10 +35,10 @@ declare global {
       constructor() { super('element') }
    }
 
-   interface Renderer {
-      parent < T = any > (args: Params<T>): JSX<any> | JSX < any > []
-      children < T = any > (args: Params<T>): JSX[]
-      syblings < T = any > (args: Params<T>): JSX[]
+   interface Flows {
+      parent<T=any>(args: Params<T>): JSX<any> | JSX < any > []
+      children<T=any>(args: Params<T>): JSX[]
+      syblings<T=any>(args: Params<T>): JSX[]
    }
 }
 

@@ -1,9 +1,9 @@
 {
    "exclude": [
       "**/*test.ts",
-      "node_modules/",
-      "package/",
-      "tests/"
+      "**/node_modules",
+      "**/package",
+      "**/tests"
    ],
    "compilerOptions": {
       "strict": false,

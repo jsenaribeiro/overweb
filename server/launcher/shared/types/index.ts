@@ -1,6 +1,7 @@
 import './react.d'
 import './render.d'
-import './launch.d'
+import './root.d'
+import './own.d'
 
 export { }
 

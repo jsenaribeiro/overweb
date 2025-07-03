@@ -1,15 +1,21 @@
 
-import Zlib from "zlib";
+import Zlib from "zlib"
+import { Path, File } from "../shared"
+import { global } from 'meta-decorator'
+import { generatePlugins } from "./plugin"
+
+const paths = global.own.directories
+const ignore = ['jsdom', 'bun', 'os', 'fs', 'marked', 'pretty-data', 'css']
 
 /** generating javascript bundle as partial hydration */
-export async function createBundle(html: string) {
+export async function createBundle() {
    console.log(`\nBUNDLING...`, "FG_YELLOW")
 
    const built = await Bun.build({
+      external: ignore,
       entrypoints: [`${paths.builds}/bundle.ts`],
-      external: ['jsdom', 'bun', 'os', 'fs', 'marked', 'pretty-data', 'css'],
       plugins: generatePlugins(),
-      minify: global.env.MINIFY,
+      minify: global.env.MINIFIED,
       target: "browser",
    })
 
@@ -21,7 +27,6 @@ export async function createBundle(html: string) {
    const path = `${paths.builds}/bundle.${mini ? 'zip' : 'js'}`
 
    await Bun.write(path, file)
-
    await validateBundle()
 }
 

@@ -4,7 +4,7 @@ import * as client from './client'
 import { fixKey, getTagName } from "../shared"
 import '../shared/types'
 
-export function parent(args: AbstractRender<any>) {
+export function parent(args: Params<any>) {
    if (!args.jsx) return undefined
    if (args.jsx[Symbol.for("reactive")]) return args.jsx
    if (Array.isArray(args.jsx)) return this.children(args)
@@ -46,12 +46,12 @@ async function parentAsync<T extends JsxType = JsxType>(type: string, args: Para
    return undefined
 }
 
-export function children<T extends JsxType=Component>(this: Renderer, args: Params<T>) {
+export function children(args: Params<any>) {
    const mapper = jsx => this.parent({ ...args, jsx })
    return React.Children.map(args.jsx, mapper)
 }
 
-export function syblings<T extends JsxType=Component>(args: Params<T>) {
+export function sybling(args: Params<any>) {
    const mapper = ([key, jsx]) => [key, this.parent({ ...args, jsx })]
    const entries = Object.entries(args.jsx).map(mapper)
    return Object.fromEntries(entries)

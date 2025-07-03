@@ -1,13 +1,6 @@
-import { children, syblings, parent } from './relatives'
+import { children, sybling, parent } from './relatives'
 
-export function getHandlers(type: MatchMode): JsxHandler[] {
-   return global.own.handlers
-      .filter(x => x.mode == "match")
-      .filter(x => x.type == type)
-      .map(x => x as JsxHandler)
-}
-
-export const flow: Renderer = { children, syblings, parent }
+export const flow: Flows = { children, syblings: sybling, parent }
 
 /** client-side is the fallback server render 
  * turn it a fallback handler */

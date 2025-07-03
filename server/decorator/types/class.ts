@@ -1,12 +1,10 @@
-import { isFunctionOrConstructorTypeNode } from 'typescript'
-import '.'
 import { Writable } from '../types'
 
 type WritableFunction = Writable<Function>
 
 export abstract class Decorator<R extends object = any, P extends object = any, F extends Function = Function> implements IDecorator {
-   public name: string
    private _call: F
+   public name: string
    public args: P
    public data: R
 

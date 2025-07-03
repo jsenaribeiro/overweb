@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { PathClass } from "./path";
+import { Path } from "./path";
 
 const cases = [
    { url: 'c:\\top\\sub', path: 'c:/top/sub' },
@@ -16,7 +16,7 @@ const cases = [
 
 test('Path: format path', function () {
    cases.forEach(function (info) {
-      const path = new PathClass(info.url)
+      const path = new Path(info.url)
       // const [field, value] = Object.entries(info).at(1)
       
       // expect(path[field]).toBe(value)
@@ -24,6 +24,6 @@ test('Path: format path', function () {
 })
 
 test('Path: . is ced', function () {
-   const path = new PathClass('.')
-   expect(path.path).toBe(PathClass.cwd)
+   const path = new Path('.')
+   expect(path.path).toBe(Path.cwd)
 })

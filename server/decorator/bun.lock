@@ -14,7 +14,7 @@
     },
   },
   "packages": {
-    "@overweb/client": ["@overweb/client@0.0.3", "", {}, "sha512-gKhQeIj56qsayZb/gWZ0LIMuVFOyMzeMGal+TVdL/RZNKFnANq7ACVmHyoMvLoyG2MPEmexyuz6amBVodF0w3g=="],
+    "@overweb/client": ["@overweb/client@0.0.8", "", {}, "sha512-2LZANepOGNx+1VXl4iJkKiNJVoJjnfkJzGAWqA2RvbMy9rajgeokl7KJOynu3JUCqESzImZJcCCpxXbHtszDqQ=="],
 
     "@types/node": ["@types/node@17.0.45", "", {}, "sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw=="],
 

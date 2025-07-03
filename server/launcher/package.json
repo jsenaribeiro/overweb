@@ -13,7 +13,11 @@
    },
    "dependencies": {
       "@overweb/client": "latest",
-      "meta-decorator": "latest"
+      "meta-decorator": "latest",
+      "pretty-data": "latest",
+      "sitemap": "latest",
+      "jsdom": "latest",
+      "css": "latest"
    },
    "devDependencies": {
       "@types/react": "latest",

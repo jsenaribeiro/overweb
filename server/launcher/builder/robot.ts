@@ -1,4 +1,3 @@
-import { context } from 'context'
 import { global } from 'meta-decorator'
 
 interface TemplateArgs {
@@ -32,6 +31,7 @@ export async function generateRobotTxt() {
    }
 
    const text = list.join('\n\n').concat(allSiteMaps)
+   const path = global.own.directories.builds
 
-   await Bun.write(`${context.options.path.builds}/robot.txt`, text)
+   await Bun.write(`${path}/robot.txt`, text)
 }

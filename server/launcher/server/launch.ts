@@ -1,15 +1,18 @@
 /// <reference path="shared.d.ts" />
 
+import { global } from "meta-decorator"
+import { serve } from './serving'
 import '@overweb/client'
-
-
-import { bundler } from '../builder'
+import '../shared/types'
 
 export function launch(settings: Partial<Settings>): Fluent
 export function launch(hasEnvFile: boolean): Fluent
 export function launch(hasEnvFile: boolean, root: `#${string}`): Fluent
 export function launch(hasEnvFile: boolean, root: `#${string}`, index: `${string}.html`): Fluent
 export function launch(args: boolean | Partial<Settings>, root?: `#${string}`, index?: `${string}.html`): Fluent {
+   const hasEnv = typeof args == 'boolean' ? args : args.isEnv
+   const handlers = global.own.handlers
+
    global.own.url = index || global.own.url
    global.own.root = root || global.own.root
 
@@ -20,49 +23,40 @@ export function launch(args: boolean | Partial<Settings>, root?: `#${string}`, i
       Object.merge(global.own.directories, settings)
    }
 
-   const fluent: Fluent = { catch: _catch, match, fetch, serve }
+   return {
+      catch(error, handler) {
+         handlers.catch.push({ error, handler})
+         return this
+      },
 
-   function _catch<E extends Error>(handler: CatchHandler<E>) {
-      global.own.handlers['catch'].push(handler)
-      return fluent
+      match(route, handler) {
+         handlers.match.push({ route, handler })
+         return this
+      },
+
+      fetch(handler) {
+         handlers.fetch.push(handler)
+         return this
+      },
+
+      build(phase, ext, handler) {
+         handlers.build[phase][ext] = handler
+         return this
+      },
+
+      parse(renderClass) {
+         if (renderClass instanceof ComponentRender)
+            handlers.parse.component = renderClass
+
+         if (renderClass instanceof FragmentRender)
+            handlers.parse.fragment = renderClass
+
+         if (renderClass instanceof ElementRender)
+            handlers.parse.element = renderClass
+
+         return this
+      },
+
+      async serve() { return await serve(hasEnv) }      
    }
-
-   function fetch(handler: FetchHandler) {
-      global.own.handlers['fetch'].push(handler)
-      return fluent
-   }
-
-   function match( type:JsxType, handler: MatchHandler) {
-      global.own.handlers.match[type] = handler
-      return fluent
-   }
-
-   async function serve() {
-      const hasEnv = typeof args == 'boolean' ? args : args.isEnv
-      const loadEnv = global.env.load
-
-      await loadEnv(hasEnv)
-      await bundler(false)
-
-      const port = global.env.PORT || 3000
-
-      console.log(`Serving at ${global.env.PORT}`, "FG_GREEN")
-      
-      return Bun.serve({
-         port: process.env.PORT || port,
-         development: global.env.FLAGS.debug,
-         async fetch(request: Request) {
-            for (const handler of global.own.handlers.fetch) {
-               const result = await handler(request)
-               if (result instanceof Response) return result
-               else if (result instanceof Request) request = result
-               else throw new Error(`Invalid handler ${handler.name}`)
-            }
-
-            throw new Error('Not found request handler response...')
-         }
-      })
-   }
-
-   return fluent
 }

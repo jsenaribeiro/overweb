@@ -1,9 +1,9 @@
-import { fixKey } from "shared"
+import { fixKey } from "../shared"
 import '../shared/types'
 
 const match = global.own.handlers.match
 
-export function component(args: Params, flow: Renderer) {
+export function component(args: Params, flow: Flows) {
    return refocus(9) && ({ ...args.jsx, type: retype })
 
    function retype(props: Props, feeds: Feeds) {
@@ -27,7 +27,7 @@ export function component(args: Params, flow: Renderer) {
    }
 }
 
-export function element(args: Params<string>, flow: Renderer) {
+export function element(args: Params<string>, flow: Flows) {
    const transform = (props, func) => func(props, args)
    const element = match.jsx.element("client", args, flow)
    const props = match.props.reduce(transform, args.jsx.props)
@@ -38,7 +38,7 @@ export function element(args: Params<string>, flow: Renderer) {
    return { ...element, props }
 }
 
-export function fragment(args: Params, flow: Renderer) {
+export function fragment(args: Params, flow: Flows) {
    const fragment = args.jsx.type == Symbol.for('react.fragment')
       && match.jsx.fragment("client", args, flow)
 
