@@ -35,7 +35,7 @@ Creating a function decorator.
 ```ts
 class log extends Decorator {
    constructor(args: LogDecoratorArgs) { super(args) }
-   public annotation = () => 'done' // decorator.data
+   public metadata = () => 'done' // decorator.data
 }
 
 ```

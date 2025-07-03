@@ -1,5 +1,5 @@
-import './all-mixins'
-import './css-tagger'
+import './js-mixins'
+import './css-tag'
 import './event-api'
 import './fetch-swr'
 import './time-api'

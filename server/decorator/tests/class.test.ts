@@ -7,12 +7,12 @@ test('class test', function () {
 
    class ok extends Decorator {
       constructor(is: boolean) { super({ is }) }
-      public annotation() { return this.call }
+      public metadata() { return this.call }
    }
 
    class log extends Decorator {
       constructor(msg: string) { super({ msg }) }
-      public annotation() { return ++counter }
+      public metadata() { return ++counter }
    }
 
    const fnc = new ok(true).decorate(

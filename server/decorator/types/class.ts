@@ -20,7 +20,7 @@ export abstract class Decorator<R extends object = any, P extends object = any, 
 
    public get call() {
       const func = (...args: any[]) => {
-         this.data = this.annotation()
+         this.data = this.metadata()
          this._call(...args)
       } 
 
@@ -39,5 +39,5 @@ export abstract class Decorator<R extends object = any, P extends object = any, 
       return call
    }
 
-   abstract annotation(): R
+   abstract metadata(): R
 }

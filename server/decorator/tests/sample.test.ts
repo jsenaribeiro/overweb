@@ -5,7 +5,7 @@ interface SampleDecorator { value: number }
 
 class log extends Decorator<SampleDecorator, { text: string }> {
    constructor(args) { super(args) }
-   public annotation() {
+   public metadata() {
       console.log(this.call.name)
       console.log(this.call.path)
       console.log(this.args.text)
