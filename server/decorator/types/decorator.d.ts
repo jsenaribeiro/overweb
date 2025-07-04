@@ -27,12 +27,9 @@ declare global {
       readonly decorators: IDecorator[]
    }
 
-   interface IDecorator<R extends object = any, P extends object = any, F extends Function = Function> { 
+   interface IDecorator<R extends object = any, F extends Function = Function> { 
       /** decorator name */
       name: string
-
-      /** decorator arguments */
-      args: P
 
       /** decorator function target */
       call: F

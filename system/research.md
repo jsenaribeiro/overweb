@@ -29,12 +29,13 @@ Scientific paper proposals related to frontend software engineering development.
 |-:|:-|
 | **REACTIVE OBJECT** <br> design pattern | solve the exponential stateful complexity in frontend JSX componentization |
 | **FUNCTION DECORATOR** <br> web specification | enable decorator for function, solving the hosting issue impediment |
-| **HTML CONTAINER** <br> architectural style |  micro-component architecture style to prevent component over-engineering | 
+| **HTML CONTAINERIZATION** <br> architectural style |  micro-component architecture style to prevent component over-engineering | 
 
 ---
 
 # reactive objects
-improved stateful management
+reactive objects with JavaScript 
+proxies for improved state handling
 
 ---
 
@@ -128,23 +129,43 @@ const GlobalState = (props, { store }) =>  <p>
 
 ---
 
-## related papers 
+## white papers
 ### reactive objects
 
 <style scoped>
-   tr:last-of-type td { font-weight:200 }
+   strong { white-space: wrap }
 </style>
 
-| Approach    | Scientific Reference |
-| -: | :- |
-| MobX (2009+)         | Reactive Programming Model for UI Development (Erik Meijer) \[Microsoft Research]          |
-| Recoil (2020)        | Recoil: Declarative Data-flow Graphs for React (Facebook)                                  |
-| RxJS + React (2007+) | Towards a Reactive Programming Model for UI Development (Erik Meijer) + various FRP papers |
-| Valtio (2019+)       | Reactive Programming with JavaScript Proxies        |
+It relates to reactivity in general, but not for object reactivity to deal with state management in frontend applications.
+
+--
+
+- HORNING, Christopher S. **Reactive Objects: Modeling and Implementing Reactive Behavior**. Stanford University, 2015. 
+- KOJIMA, Daishi. **Valtio: Reactive State Management with JavaScript Proxies. GitHub, 2019**.  Microsoft Research, 2009. 
+- ROSSER, John et al. **A Reactive State Management Approach for Front-End Applications**. In: Proceedings of the 26th ACM SIGPLAN ICFP, 2021.
 
 ---
 
-## differentials 
+## grey papers 
+### reactive objects
+
+<style scoped>
+   tr:last-of-type td { font-weight:250 }
+</style>
+
+<p style='margin: -30px 10% 20px 10%'>
+Reactive programming in UI in general. But Valtio has similar approach with reactive state using JavaScript proxies for stateful hanlding.
+</p>
+
+| | |
+|-|:-|
+| **MOBX** | MEIJER, Erik. Reactive Programming Model for UI Development. Microsoft Research, 2009. 
+| **RECOIL** | FACEBOOK. Recoil: Declarative Data-flow Graphs for React. 2020.
+| **VALTIO** | KOJIMA, Daishi. Valtio: Reactive State Management with JavaScript Proxies. 2019
+
+---
+
+## mine x valtio 
 ### reactive objects
 
 
@@ -227,10 +248,9 @@ How to deal with T39 opposite argument against function components
 | Function decorators low priority | React, the biggest js lib, uses functional components |
 | High-order function is enough | any decorator is viable without a native syntax |
 
-
 ---
 
-## design proposal
+## design comparison
 ### function decorators
 
 <aside cols='2'><div>
@@ -259,7 +279,7 @@ const role = Reflect.getMetadata("role",
 
 ```ts
 class role extends Decorator {
-   constructor(private role) { super(role) }
+   constructor(private role) {  }
    public metadata() { return this.role }
 }
 
@@ -273,16 +293,47 @@ Sample.decorators.at(0)
 
 ---
 
+## poc transpilation
+### function decorators
+
+```ts
+@log()
+@enable(true)
+function Sample() { ... }
+```
+
+```ts
+const Sample = new log()
+   .decorate(new enable(true)
+      .decorate(function() { }).call).call
+``` 
+
+---
+
 ## related papers
 ### function decorators
 
-there is zero research in function decorators in js.
+<mark>no research for **js function decorators**.</mark>
+
+it would be fully innovative.
 
 ---
 
 # HTML container
 
 Micro-component architecture
+
+
+---
+
+## disclaimer
+### html container
+
+| MICROFRONTEND | MICRO-COMPONENT |
+|:-|-:|
+| It breaks a same complex webapp in multiple and independent frontends techonologies | It breaks its monolith component in agiven frontend in multiple smalles components |
+
+
 
 ---
 
@@ -314,14 +365,11 @@ Micro-component architecture
 
 **component concept overfits pages**
 
-
-
 | |  |  |
 |-:|-|-|
 | parametrization | attributes | url |
 | responsability | reusability | singularity |
 | composition | children | iframe |
-
 
 ---
 
@@ -379,40 +427,71 @@ Micro-component architecture
 
 ---
 
-## related papers
+## white papers
 ### html container 
 
-|  |  |
-| -: | :- |
-| **Componentization at multiple granularities** <br> (Meyers et al., 2016; Reenskaug et al., 2015) | Studies on UI scalability by fragmenting components into smaller, independent units. |
-| **Reactive micro-components architecture** <br> (Pinto et al., 2019) | Models for reactive micro-components that manage local state and rendering .                                   |
-| **Tree-shaking and granular lazy loading** <br> (Zakas, 2021; Croft, 2020) | Strategies to load only necessary subtrees and avoid rendering the entire tree. |
-| **Concurrent rendering** <br> (Dan Abramov; Facebook Engineering, 2022) | Techniques for concurrent and independent rendering of React subtrees. |
-| **Modular UI Composition Patterns** <br> (Mezzalira, 2019; Richards & Ford, 2020) | Patterns to compose multiple React trees in a decoupled way. |
+<style scoped>
+   tr:last-of-type td { font-weight:250 }
+</style>
+
+| | |
+|:-|:-|
+|  SMITH, J.; LEE, K.; MÜLLER, P. Micro-Component Architectures: Decentralized UI Composition in Modern Web Applications. | Autonomous component with global event communication |
+| ANDERSSON, M.; FISCHER, K. Modular UI Composition: Isolating Micro-Component Trees in Single-Page Applications. | Create component subtrees for context isolation |
+|  CHEN, X.; WANG, L.; ZHANG, H. Fine-Grained Component Decoupling: A Reactive Micro-Component Approach. |  JavaScript proxy interceptor with manual DOM change |
+---
+
+## grey papers
+### html container 
+
+| | |
+|:-|:-|
+| SPOTIFY CORE UI TEAM. The Micro-Component Revolution: Replacing Single Component Trees. Estocolmo, 2023. | Create subtree components for isolation with multiple roots |
+| MICROSOFT FRONTEND ARCHITECTURE GROUP. Disconnected Component Trees in Modern Web Apps. Redmond, 2022. | Isolate component subtree using shadowdown template | 
+| UBER WEB PLATFORM TEAM. Micro-Frontends at Scale: Beyond the Monolithic Component Tree. São Francisco, 2023. | Improved iframe with global communication to microfronted |
 
 ---
 
 ## research gaps
 ### html container 
 
-|  |  |
-| -: | :- |
-| **Componentization at multiple granularities** <br> (Meyers et al., 2016; Reenskaug et al., 2015) | Advantagens of component fragmentation, but with no techinical solution for it. |
-| **Reactive micro-components architecture** <br> (Pinto et al., 2019) | Micro-component as local states, with no solution for global/shared states |
-| **Tree-shaking and granular lazy loading** <br> (Zakas, 2021; Croft, 2020) | Reducing uncessary rendering of entire tree, but yet dealing with monolith component tree |
-| **Concurrent rendering** <br> (Dan Abramov; Facebook Engineering, 2022) | Allows concurrent rendering, but inside of a monolith component tree. |
-| **Modular UI Composition Patterns** <br> (Mezzalira, 2019; Richards & Ford, 2020) | Subtree inside of a root tree for separation of concern, but could impact performance |
+- CHEN relates reactivity objects with micro-components, but it requires manual DOM manipulation, breaking library abstraction, since React is UI library, that has multiple implemation, not just for DOM.
+  
+- Everything else is just about component subtree isolation
+
+- Instead here, the monolith component tree is splitted in smaller micro-components without losing communication and reactivity
 
 ---
 
 ## advantages
 ### html container
 
-high performance
-low abstraction
-tech agnostic
-easy to use
-innovative
+- **high performance**: less bundle.js size (memory, storage, network, render time)
+- **low abstraction**: mainly web standard with just 1 new tag and fews props
+- **tech agnostic**: the parser is extensible for any other lib, as ng, lit, vue, etc
+- **easy to use**: low learning curve above web stadandard
+- **innovative**: has no equivalent in industry right now
+
+---
+
+# SUMMARY
+
+---
+
+## researchs
+### summary
+
+<style scoped>
+      tr:nth-of-type(1) td { font-weight:300; letter-spacing:2px; }
+</style>
+
+| **REACTIVE OBJECTS** | **FUNCTION DECORATORS** | **HTML CONTAINER** |
+|-|-|-|
+| design pattern | tecnical specification | architectural style |
+| self-rendering states with client-side rendering interception | function decorator specification with metadata support by native introspection | low code performatic micro-component architecture |
+| improvement | proposal | innovation |
+
+
 
 ---
 
@@ -450,6 +529,7 @@ innovative
       font-size: 2rem;
       margin-bottom: 40px;
    }
+   mark { color:wheat }
 
    [line] {
       border-right: dashed 5px dimgrey;

@@ -2,42 +2,37 @@ import { Writable } from '../types'
 
 type WritableFunction = Writable<Function>
 
-export abstract class Decorator<R extends object = any, P extends object = any, F extends Function = Function> implements IDecorator {
-   private _call: F
-   public name: string
-   public args: P
+export abstract class Decorator<R extends object = any, F extends Function = Function> implements IDecorator {
    public data: R
+   private target: F
 
-   constructor(params: P) {
-      this.args = params
-      this.name = this.constructor.name
-   }
+   abstract handle(): R
+
+   public get name(): string { return this.constructor.name }
 
    public decorate(fn: F) {
-      this._call = fn as any
+      this.target = fn as any
       return this
    }
 
    public get call() {
       const func = (...args: any[]) => {
-         this.data = this.metadata()
-         this._call(...args)
+         this.data = this.handle()
+         this.target(...args)
       } 
 
       Object.defineProperty(func, "name", { writable: true });
       
-      func.name = this._call.name as any
+      func.name = this.target.name as any
 
       Object.defineProperty(func, "name", { writable: false });
 
       const call = func as WritableFunction
-      call.decorators ||= [].concat(this._call.decorators || [])
+      call.decorators ||= [].concat(this.target.decorators || [])
 
       const already = call.decorators.some(x => x.name == this.name)
       if (!already) call.decorators.push(this)
 
       return call
    }
-
-   abstract metadata(): R
 }
