@@ -16,7 +16,6 @@ Scientific paper proposals related to frontend software engineering development.
 
 **Jonathan de Sena Ribeiro**
 
-
 ---
 
 ## SCHEDULE
@@ -280,13 +279,13 @@ const role = Reflect.getMetadata("role",
 ```ts
 class role extends Decorator {
    constructor(private role) {  }
-   public metadata() { return this.role }
+   public handle() { return this.role }
 }
 
 @role('admin') function Sample() { ... }
 
 Sample.decorators.at(0) 
-// { name:'role', data:'admin', args:'admin' }
+// { name:'role', data:'admin' }
 ```
 
 </div></aside>
@@ -340,7 +339,7 @@ Micro-component architecture
 ## monolith components
 ### html container
 
-<aside cols='2'>
+<aside cols='2' style='gap: 20px'>
 <img src='img/component-tree.png' style='justify-self:end' >
 <div left>
 
@@ -351,9 +350,9 @@ Micro-component architecture
 
 <hr/>
 
-- costful rendering
-- highly complex
-- deep tree
+- render time
+- bundle size 
+- memory cost
 
 </div>
 </aside>
@@ -515,7 +514,7 @@ Micro-component architecture
    [cols='2'] { grid-template-columns: 1fr 1fr; }
    [cols='4:5'] { grid-template-columns: 4fr 5fr; }
    pre > * { border: solid 7px #333; border-radius: 5px;  }   
-   pre { filter: contrast(1.17); font-size: 1.9rem;  }   
+   pre { filter: contrast(1.3); font-size: 1.9rem;  }   
    [left] { text-align:left }
    table td { font-size: 1.6rem }   
    h1 { color: wheat; text-transform: uppercase }

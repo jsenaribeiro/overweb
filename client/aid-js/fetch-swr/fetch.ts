@@ -1,50 +1,59 @@
-/// <reference path="./types.ts" />
+/// <reference path="./type.ts" />
 /// <reference path="../time-api/index.ts" />
 
-async function fetchApi(...args: any[]) {
+async function fetchImplementationSWR(...args: any[]) {
    try {
       if (args.length == 3) {
-         const [url, repeat, interval] = args as [string, number, number]
-         return fetchApi(url, { retry: { repeat, interval } })
+         const [arg, repeat, interval] = args as [any, number, number]
+         const url = typeof arg == 'string' ? new URL(arg) : arg
+         return fetchImplementationSWR(url, { retry: { repeat, interval } })
       }
 
-      const [url, settings] = [args[0], args[1] || {}]
+      if (typeof args[0] == 'string')
+         return fetchImplementationSWR(new URL(args[0]), args[1])
+
+      const [url, settings] = [args[0], args[1] || {}] as [URL, FetchSettings]
       const retry = settings.retry
-      const cache = settings.cache || "no-cache"
+      const cache = (settings.cache || false) as CacheValue
       const verb = settings.method?.toLowerCase() || 'get'
       const authentication = localStorage.getItem('token')
          || sessionStorage.getItem('token')
          || ''
 
-      const baseSettings: RequestInit = cache == "no-cache" ? { ...settings, cache: "no-cache" }
-         : cache == "force-cache" ? { ...settings, cache: "force-cache" }
-            : { ...settings, cache: "no-cache" }
+      const baseSettings: RequestInit
+         = cache === false ? { ...settings, cache: "no-cache" }
+         : cache === true ? { ...settings, cache: "force-cache" }
+         : { ...settings, cache: "no-cache" }
 
       const authSettings = authentication
          ? { ...baseSettings, authentication }
          : { ...baseSettings }
 
-      const finalSettings = fetchApi.interceptors
+      const finalSettings = fetchImplementationSWR.interceptors
          .filter(x => x.type == "request")
          .reduce((obj, int) => int.fn(obj), authSettings)
 
-      if (verb != "get") return await refetch(url, finalSettings, retry)
+      if (verb != "get") return await refetch(url, finalSettings, retry)      
+      
+      const key = Array.isArray(settings.cache)
+                ? settings.cache?.join('.')
+                : url.toString()
+      
+      const has = key && Object.keys(fetchImplementationSWR.cache)
+                               .some(k => k === key)
 
-      const key = settings.cacheKeys?.join('.') || url.toString()
-      const has = Object.keys(fetchApi.cache).includes(key)
+      if (has) return fetchImplementationSWR.cache[key]
 
-      if (has) return fetchApi.cache[key]
-
-      const cleared = () => { delete fetchApi.cache[key] }
       const timeout = Time.parse(cache as any)
       const content = await refetch(url, finalSettings, retry)
+      const cleared = () => { delete fetchImplementationSWR.cache[key] }
 
-      fetchApi.timer[key] = setTimeout(cleared, timeout)
+      fetchImplementationSWR.timer[key] = setTimeout(cleared, timeout)
 
-      return fetchApi.cache[key] = content
+      return fetchImplementationSWR.cache[key] = content
 
       async function refetch(url: URLArgs, settings?: RequestInit, retry?: FetchRetry, reget?: FetchReget) {         
-         fetchApi.statistics.requests++
+         fetchImplementationSWR.statistics.requests++
          settings = { ...settings }
 
          const response = await fetch(url, settings) as Response         
@@ -54,7 +63,7 @@ async function fetchApi(...args: any[]) {
 
          if (!response.ok && retry?.repeat) {
             retry.repeat--
-            fetchApi.statistics.retries++
+            fetchImplementationSWR.statistics.retries++
             await Time.delay(retry.interval)
             return await refetch(url, settings, retry)
          }
@@ -64,7 +73,7 @@ async function fetchApi(...args: any[]) {
             setInterval(callback, reget.interval)
          }
 
-         return fetchApi.interceptors
+         return fetchImplementationSWR.interceptors
             .filter(x => x.type == "response")
             .reduce((obj, int) => int.fn(obj), response)
       }
@@ -72,7 +81,7 @@ async function fetchApi(...args: any[]) {
    }
    catch (ex: any) {
       if (ex instanceof Error)
-         ex = fetchApi.interceptors
+         ex = fetchImplementationSWR.interceptors
             .filter(x => x.type == "reject")
             .reduce((obj, int) => int.fn(obj), ex)
 
@@ -80,24 +89,46 @@ async function fetchApi(...args: any[]) {
    }
 }
 
-fetchApi.cache = {}
-fetchApi.timer = null
-fetchApi.interceptors = []
+fetchImplementationSWR.cache = {}
+fetchImplementationSWR.timer = null
+fetchImplementationSWR.interceptors = []
 
-fetchApi.on = (type: OnFetchApi, fn: Function) =>
-   fetchApi.interceptors.push({ type, fn })
+fetchImplementationSWR.on = (type: OnFetchApi, fn: Function) =>
+   fetchImplementationSWR.interceptors.push({ type, fn })
 
-fetchApi.statistics = { regets:0, retries:0, requests:0,
+fetchImplementationSWR.statistics = {
+   regets: 0, retries: 0, requests: 0,
    clear(){ this.regets=0; this.retries=0; this.requests=0; }
 }
 
-fetchApi.clear = (...keys: string[]) => 
-   !keys.length && Object.keys(fetchApi?.cache).length
-      ? fetchApi.clear(...Object.keys(fetchApi.cache))
+fetchImplementationSWR.clear = (...keys: string[]) => 
+   !keys.length && Object.keys(fetchImplementationSWR?.cache).length
+      ? fetchImplementationSWR.clear(...Object.keys(fetchImplementationSWR.cache))
    : keys.forEach(k => {
-      delete fetchApi.cache[k]
-      clearTimeout(fetchApi.timer[k])
-      delete fetchApi.timer[k]
+      delete fetchImplementationSWR.cache[k]
+      clearTimeout(fetchImplementationSWR.timer[k])
+      delete fetchImplementationSWR.timer[k]
    }) as any
 
-(globalThis as any).fetchApi = fetchApi as FetchApi;
+
+fetchImplementationSWR.clear = function clear(...keys: any[]) {
+   const cache = fetchImplementationSWR?.cache || {}
+   const timer = fetchImplementationSWR.timer
+
+   if (!Object.keys(cache).length) return   
+   if (!keys.length) return clear(...Object.keys(cache))   
+   
+   else for (const k of keys) {
+      cache && delete cache[k]
+      clearTimeout(timer[k])
+      timer && delete timer[k]
+
+      Object.keys(cache).forEach(function (cacheKey) {
+         if (cacheKey.startsWith(k)) clear(cacheKey)
+      })
+   }
+}
+   
+const fetchSWR: FetchApi = fetchImplementationSWR;
+
+(globalThis as any).fetchSWR = fetchSWR;

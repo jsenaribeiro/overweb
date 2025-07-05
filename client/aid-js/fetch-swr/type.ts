@@ -1,6 +1,7 @@
+type CacheKeys = any[]
 type URLArgs = string | URL | globalThis.Request
 type OnFetchApi = "request" | "response" | "reject"
-type CacheValue = "no-cache" | "force-cache" | TimeString | number
+type CacheValue = boolean | TimeString | CacheKeys | number 
 
 interface FetchRetry { repeat: number, interval: number }
 
@@ -10,7 +11,6 @@ interface FetchSettings extends Omit<RequestInit, "cache"> {
    reget?: FetchReget
    retry?: FetchRetry
    cache?: CacheValue
-   cacheKeys?: string[]
 }
 
 interface FetchApi {
@@ -27,7 +27,7 @@ interface FetchApi {
    on(type: "request", fn: (request: RequestInit) => RequestInit)
    on(type: "response", fn: (response: Response) => Response)
    clear(): void
-   clear(keys: string[]): void
+   clear(...keys: string[]): void
    cache: object
    timer: any
    interceptors: any[]

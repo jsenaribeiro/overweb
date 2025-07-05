@@ -1,44 +1,64 @@
 <style>
+   aside { display:grid; gap: 15px; }
+   [cols='2'] { grid-template-columns: 1fr 1fr; }
+   [cols='3'] { grid-template-columns: 1fr 1fr 1fr; }
    aside * {
       align-self: start !important;
    }
 </style>
 
-<aside style='display:grid; grid-template-columns: 4fr 5fr;'>
+
+## @overweb/client
+
+<aside cols='3'>
 
 ```
-@overweb/client
-
-+ aid-js (helpers)
-- js-mixins
-- fetch-swr
-- event-api
-- router-api
-- time-api
-- types
-
-+ rest-orm (better)
-- low code
-- fluent api
-- diff mutation
-
-+ vanilla-spa (innovative)
-- 18n-min: globalization
-- css-tag: componentizaon
-- up-slot: microfrontend
-
+js+ (mixins)
++ time
+^ array
+^ object
+^ string
+^ number
 ```
 
 ```
-@overweb/server
+web+ (apis)
++ sync
++ event
++ router
++ fetchSWR
+```
 
-+ jss-pipeline (agnostic)
+```
+html+
+- i18n-min
+- css-tag
+- slot+
+```
+
+</aside>
+
+## @overweb/server
+
+<aside cols=3>
+
+```
+jss-helpers
+- File
+- Path
+- 
+```
+
+```
+jss-launch
 - pipeline: parser, render, server
 - metadata: env, ioc, own
 - standard: File, Path, etc
 - defaults: bun, jsx
+```
 
-+ jsx-framework (metaframework)
+```
+jsx-framework
 - jss-css-import
 - jss-function-decorator
 - jss-attribute-handler
@@ -46,4 +66,10 @@
 - jss-html-container
 - jss-binding-props
 - jss-meta-server
+```
+
+</aside>
+
+```ts
+fetch('http;''''')
 ```
