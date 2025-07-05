@@ -26,6 +26,7 @@ interface FetchApi {
    on(type: "reject", fn: (error: Error) => Error | Promise<Error>)
    on(type: "request", fn: (request: RequestInit) => RequestInit)
    on(type: "response", fn: (response: Response) => Response)
+   token?: string
    clear(): void
    clear(...keys: string[]): void
    cache: object

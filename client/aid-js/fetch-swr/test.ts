@@ -1,6 +1,6 @@
 import './fetch'
 
-fetchSWR('http://', { cache:['todo', 1] })
+fetcher('http://', { cache:['todo', 1] })
 
 // import { test, expect } from 'bun:test'
 // import "../fetch-swr";

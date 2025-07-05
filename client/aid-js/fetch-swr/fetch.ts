@@ -128,7 +128,14 @@ fetchImplementationSWR.clear = function clear(...keys: any[]) {
       })
    }
 }
-   
-const fetchSWR: FetchApi = fetchImplementationSWR;
 
-(globalThis as any).fetchSWR = fetchSWR;
+Object.defineProperty(fetchImplementationSWR, 'token', {
+   get() { return sessionStorage.getItem('token') },
+   set(value) { sessionStorage.setItem('token', value) },
+   configurable: true,
+   enumerable: true 
+});
+   
+const fetcher: FetchApi = fetchImplementationSWR;
+
+(globalThis as any).fetchSWR = fetcher;

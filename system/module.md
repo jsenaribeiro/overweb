@@ -5,7 +5,11 @@
    aside * {
       align-self: start !important;
    }
+
+   h1 { border:0; text-align: center; font-size: 2.1rem }
 </style>
+
+# @overweb
 
 
 ## @overweb/client
@@ -23,10 +27,10 @@ js+ (mixins)
 
 ```
 web+ (apis)
-+ sync
-+ event
 + router
-+ fetchSWR
++ broker
++ fetcher
++ syncher
 ```
 
 ```
@@ -40,36 +44,31 @@ html+
 
 ## @overweb/server
 
-<aside cols=3>
+<aside cols style='grid-template-columns: 3fr 3fr 4fr'>
 
 ```
-jss-helpers
-- File
-- Path
-- 
+jss-aid
+- File|Path
+- JSON|JSXON
+- ioc|own|env
 ```
 
 ```
 jss-launch
-- pipeline: parser, render, server
-- metadata: env, ioc, own
-- standard: File, Path, etc
-- defaults: bun, jsx
+- parser
+- render
+- server
 ```
 
 ```
 jsx-framework
-- jss-css-import
-- jss-function-decorator
-- jss-attribute-handler
-- jss-reactive-object
-- jss-html-container
-- jss-binding-props
-- jss-meta-server
+- css-import
+- fn-decorator
+- props-handler
+- reactive-object
+- html-container
+- binding-props
+- meta-server
 ```
 
 </aside>
-
-```ts
-fetch('http;''''')
-```
