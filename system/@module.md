@@ -12,7 +12,7 @@
 # @overweb
 
 
-## @overweb/client
+## @overweb/client (w3c-plus)
 
 <aside cols='3'>
 
@@ -26,7 +26,7 @@ js+ (mixins)
 ```
 
 ```
-web+ (apis)
+dom+ (apis)
 + router
 + broker
 + fetcher

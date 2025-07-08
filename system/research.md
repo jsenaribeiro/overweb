@@ -5,11 +5,11 @@ theme: uncover
 paginate: true
 ---
 
-# paper proposals
+# proposals
 <hr>
 
 <div style='padding:0 25%'>
-Scientific paper proposals related to frontend software engineering development. All proposal here are validated by PoCs
+Scientific paper proposals of PoC frontend software engineering development.
 </div>
 
 <br>
@@ -328,9 +328,11 @@ Micro-component architecture
 ## disclaimer
 ### html container
 
+<div bold style='margin-bottom:-40px'>VS</div>
+
 | MICROFRONTEND | MICRO-COMPONENT |
 |:-|-:|
-| It breaks a same complex webapp in multiple and independent frontends techonologies | It breaks its monolith component in agiven frontend in multiple smalles components |
+| It breaks a web site application in various independent frontends probjects | It breaks its monolith component in multiple smalles components in a sema projet |
 
 
 
@@ -507,8 +509,8 @@ Micro-component architecture
 
    section { font-size: 1.8rem; letter-spacing:0.3px }
    code * { font-family: agave, consolas, monospace }
-   body, ul, section { font-family: 'geist'; font-weight:100 }
-   h1, h2, h3, h4, h5 { font-family: 'geist' }
+   body, ul, section { font-family: 'fira sans'; font-weight:100 }
+   h1, h2, h3, h4, h5 { font-family: 'fira sans' }
    strong { white-space: nowrap }
    [cols] { display:grid; }
    [cols='2'] { grid-template-columns: 1fr 1fr; }
@@ -529,7 +531,7 @@ Micro-component architecture
       margin-bottom: 40px;
    }
    mark { color:wheat }
-
+   [bold] { font-weight:bolder }
    [line] {
       border-right: dashed 5px dimgrey;
       margin-right: 30px;
