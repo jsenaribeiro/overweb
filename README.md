@@ -2,39 +2,34 @@
 
 Overweb is a software engineering research in frontend developement. The **jss** here means javascript on server (or server-side javascript).
 
-| character | mean | description |
-|:-:|-|-|
-| \> | package | sub-divisions  |
-| ^ | dependencies | imported packages |
-| + | innovation | new library feature |
-| - | minimalized | enhanced simplified feature |
-| = | supports | feature that library supports |
-| ~ | incremental | relative enhanced feature |
-| L | related | related itens of a feature |
+| \> package | + innovation | - minimal | = support | ~ improved |
+| :--------: | :---: | :-------: | :-------: | :--------: |
 
-## @overweb/client 
+Above has the legend to specific contribution library.
 
-| | |
-|-:|-|
-| **aid-js** <br> (< 1kb) | + fetch swr extensions: cache, token, clear <br> +  css-tagger: css component pattern <br> ~ type mixins: string, object, array <br>  ~ event api fluent facade |
-| **async-api** <br> (< 1kb) | ^ js-aid <br> + REST mapping <br> + synchorization <br> + authentication |
-| **native-spa** <br> agnostic <br> (< 30kb) | ^ async-api, js-plus, js-aid <br> + router-api: unified router <br> + multi-spa: microfrontend <br> + i18n-aid: i18n props |
+## LIBRARIES
 
-## @overweb/server 
+**Client-side** javascript libraries.
 
-| | |
-|-:|-|
-| **meta-decorator**| + function decorators <br> - new globals env, ioc, own <br> ~ facade File, Path, JSXON, etc |
-| **html-container** | + micro-component architecture <br> + web standard friendly <br> + JSX-in-HTML feature |
-| **jsx-launcher** | + loader: build, import, link(html) <br>  + render: component, element, fragment <br> + server: match(route), fetch(req), catch(ex) |
+| aid-js | async-api | native-spa |
+|-|-|-|
+| + fetch + event APIs <br> + css component patttern <br>  ~ mixins: string, object, array, etc | + mapping <br> + synchorizer <br> + authentication | + router-api: unified router <br> + multi-spa: microfrontend <br> + i18n-aid: i18n props |
 
-## @overweb/system (jsx-framework)
+Javascript **server-side** libraries
+
+| meta-decorator | html-container | jsx-launcher |
+|-|-|-|
+| + function decorators <br> - metadata env, ioc, own <br> ~ facade: File, JSXON, etc | + micro-component <br> + web standard <br> + JSX-in-HTML | + loader: build, import, link <br>  + render: comp, elem, frag <br> + server: match, fetch, catch |
+
+React **metaframework** with /client and /server libraries
 
 | innovation | improvement | support | 
 |-|-|-|
 | + reactive objects <br> + attribute render <br> + modular CSS <br> + dual binding | - await props (suspense alternative) <br> - directory routes (no conventions) <br> - dynamic route (with decorators) <br> - props routing (declarative way) | = prefetch routing <br> = server components <br> = SSR streaming <br> = restful api |
 
-## Sample
+<br/>
+
+## EXAMPLES
 
 Example of todo list using jsx-framework with global states with reactive objects, data binding props and modular CSS imports
 
