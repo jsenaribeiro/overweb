@@ -27,7 +27,6 @@ React **metaframework** with /client and /server libraries
 |-|-|-|
 | + reactive objects <br> + attribute render <br> + modular CSS <br> + dual binding | - await props (suspense alternative) <br> - directory routes (no conventions) <br> - dynamic route (with decorators) <br> - props routing (declarative way) | = prefetch routing <br> = server components <br> = SSR streaming <br> = restful api |
 
-<br/>
 
 ## EXAMPLES
 
